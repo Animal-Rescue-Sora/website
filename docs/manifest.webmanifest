@@ -1,0 +1,36 @@
+{
+  "short_name": "A.R.S.",
+  "name": "アニマルレスキュー宇宙",
+  "description": "犬・猫を主として、飼い主のいない動物たちの保護活動に取り組んでいます。三重県尾鷲市内で保護施設を運営しており、獣医師の協力を得て健康管理や避妊・去勢手術を適切に施しています。",
+  "icons": [
+    {
+      "src": "/common/img/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/common/img/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "screenshots": [],
+  "display": "minimal-ui",
+  "scope": "/",
+  "start_url": "https://animal-rescue-sora.netlify.app/?utm_source=homescreen",
+  "background_color": "#6f8d1b",
+  "theme_color": "#f18b02",
+  "/common/js/bundle.js": "/common/js/bundle.min.js",
+  "/amazon-button.js": "/common/js/chunks/amazon-button.min.js",
+  "/contact-bar.js": "/common/js/chunks/contact-bar.min.js",
+  "/decision-to-foster-parent-slider.js": "/common/js/chunks/decision-to-foster-parent-slider.min.js",
+  "/faq-list-item.js": "/common/js/chunks/faq-list-item.min.js",
+  "/faq-list.js": "/common/js/chunks/faq-list.min.js",
+  "/google-map.js": "/common/js/chunks/google-map.min.js",
+  "/news.js": "/common/js/chunks/news.min.js",
+  "/supported-slider.js": "/common/js/chunks/supported-slider.min.js",
+  "/structured-data.js": "/common/js/chunks/structured-data.min.js",
+  "/waiting-card-list.js": "/common/js/chunks/waiting-card-list.min.js",
+  "/styles.css": "/common/css/style.min.css",
+  "/common/js/chunks/930.min.js": "/common/js/chunks/930.min.js"
+}

@@ -1,0 +1,275 @@
+@use "sass:math";
+
+:root {
+  line-height: 1.5;
+  font-display: swap;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+
+  @media (min-width: 641px) {
+    font-size: .625rem; // 10px相当
+  }
+
+  @media (max-width: 640px) and (min-width: 321px) {
+    font-size: calc(.625rem + ((1vw - 3.21px) * 3.1348)); // 640px幅 20px → 321px幅 10px 相当
+  }
+
+  @media (max-width: 320px) {
+    font-size: .625rem; // 10px相当
+  }
+}
+
+:target {
+  &::before {
+    display: block;
+    content: "";
+    pointer-events: none;
+
+    @media (min-width: 641px) {
+      margin-top: -5.1rem;
+      height: 5.1rem;
+    }
+
+    @media (max-width: 640px) {
+      margin-top: -5.6rem;
+      height: 5.6rem;
+    }
+  }
+}
+
+[tabindex="-1"] {
+  outline: none;
+}
+
+html {
+  &:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  color: #424242;
+  line-height: inherit;
+  min-width: 32rem;
+  font-size: 1.6rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  height: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -moz-touch-callout: none;
+  -ms-touch-callout: none;
+  -webkit-user-drag: none;
+  aspect-ratio: attr(width) / attr(height);
+}
+
+input {
+  &[type="text"] {
+    /* WebKit, Blink, Edge */
+    &::-webkit-input-placeholder {
+      color: #bdbdbd;
+    }
+
+    /* Internet Explorer 10-11 */
+    &:-ms-input-placeholder {
+      color: #bdbdbd;
+    }
+
+    /* Others */
+    &::placeholder{
+      color: #bdbdbd;
+    }
+  }
+}
+
+button {
+  appearance: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+mark {
+  background-color: transparent;
+  color: currentColor;
+}
+
+a {
+  &:link {
+    &[href^="tel"] {
+      @media screen and (hover: hover) {
+        color: currentColor;
+        text-decoration: none;
+        pointer-events: none;
+      }
+
+      @media screen and (hover: none) and (pointer: coarse) {
+        pointer-events: auto;
+      }
+    }
+  }
+
+  // &:visited {}
+}
+
+#app {
+  min-height: inherit;
+}
+
+.support-fund {
+  margin: 0 auto;
+  width: min(100%, 90rem);
+
+  h3 {
+    + p {
+      margin-top: 1.6rem;
+    }
+  }
+
+  p {
+    + p {
+      margin-top: 1.6rem;
+    }
+
+    + h3 {
+      margin-top: 3.2rem;
+    }
+  }
+}
+
+.access {
+  margin: 0 auto;
+  width: min(100%, 76.8rem);
+
+  h3 {
+    margin-top: 2.4rem;
+
+    + p {
+      margin-top: 1.2rem;
+    }
+  }
+}
+
+.application-guidelines {
+  margin: 0 auto;
+  width: min(100%, 76.8rem);
+
+  h3 {
+    margin-top: 2.4rem;
+    text-align: center;
+
+    + p {
+      margin-top: 1.2rem;
+    }
+  }
+
+  p {
+    margin: 2.4rem auto;
+
+    + p {
+      margin-top: -1.6rem;
+    }
+  }
+
+  ul {
+    margin: 2.4rem auto;
+
+    li {
+      position: relative;
+      padding-left: 1.6rem;
+
+      + li {
+        margin-top: .4rem;
+      }
+
+      &::before {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        content: "-";
+      }
+    }
+  }
+
+  ol {
+    display: table;
+    margin: 2.4rem auto;
+    padding: 0;
+
+    li {
+      display: table-row;
+      counter-increment: table-ol;
+
+      &::before {
+        display: table-cell;
+        content: counter(table-ol) ".";
+        padding-right: .4em;
+        text-align: right;
+      }
+
+      &::after {
+        display: block;
+        content: "";
+      }
+
+      &:not(:last-child) {
+        &::after {
+          margin-bottom: .4em;
+        }
+      }
+    }
+  }
+}
+
+.detail-list {
+  font-size: 1.4rem;
+
+  li {
+    &:not(:last-child) {
+      dl {
+        display: flex;
+
+        dt {
+          flex-shrink: 0;
+          flex-basis: 8rem;
+        }
+      }
+    }
+
+    &:last-child {
+      dl {
+        dd {
+          margin-top: .4rem;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    dl {
+      dt {
+        font-weight: 700;
+      }
+    }
+
+    + li {
+      margin-top: .8rem;
+    }
+  }
+}
