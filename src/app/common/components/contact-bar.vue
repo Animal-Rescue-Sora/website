@@ -112,7 +112,7 @@ export default {
 .contact-bar {
   position: sticky;
   bottom: 0;
-  z-index: 1;
+  z-index: 10;
 
   display: flex;
 

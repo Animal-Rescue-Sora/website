@@ -6,13 +6,16 @@
     role="listitem"
   >
     <a
+      v-ripple
       :href="$props.href"
       itemprop="url"
+      @click="$store.dispatch('theGlobalMenu', _theGlobalMenu)"
     >
-      <icn-arrow-downward />
+      <icn-arrow-downward v-if="$mq === 'd'" />
       <span itemprop="name">
         <slot />
       </span>
+      <icn-arrow-downward v-if="$mq !== 'd'" />
     </a>
   </div>
 </template>
@@ -58,13 +61,34 @@ export default {
 @use "sass:math";
 
 .global-navigation-item {
-  font-size: 1.4rem;
+  @media (min-width: 899px) {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 898px) {
+    font-size: 2rem;
+    border-bottom: .1rem solid #333;
+  }
 
   a {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: currentColor;
+
+    @media (min-width: 899px) {
+      border-radius: .3rem;
+    }
+
+    @media (max-width: 898px) {
+      padding: 1.6rem;
+    }
+
+    span {
+      @media (max-width: 898px) {
+        flex-grow: 1;
+      }
+    }
 
     i {
       width: 2.4rem;

@@ -5,7 +5,7 @@
     :id="$props.id ? $props.id : null"
     :tabindex="$props.id ? '-1' : null"
     :class="$props.classification ? `page-section--${$props.classification}` : null"
-    :style="{ backgroundImage: `url(${$props.src})` }"
+    :style="$props.src ? { backgroundImage: `url(${$props.src})` } : null"
     class="vc page-section"
   >
     <div>

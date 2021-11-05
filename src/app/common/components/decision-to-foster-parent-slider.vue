@@ -3,6 +3,20 @@
 <template>
   <div class="vc decision-to-foster-parent-slider">
     <div
+      v-if="$data.xhr.loading.status.loading"
+      class="decision-to-foster-parent-slider__loading-spinner"
+    >
+      <svg viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10" />
+      </svg>
+    </div>
+    <div
+      v-if="$data.xhr.loading.status.error"
+      class="decision-to-foster-parent-slider__error-msg"
+    >
+      <p>何らかの原因によりデータの読み込みに失敗しました。時間をおいて再度ページを読み込み直してください。</p>
+    </div>
+    <div
       ref="swiper"
       class="swiper"
     >
@@ -215,8 +229,33 @@ export default {
 
 <style lang="scss" scoped>
 @use "sass:math";
-
 .decision-to-foster-parent-slider {
+  &__loading-spinner {
+    svg {
+      display: block;
+      margin: auto;
+      width: 10rem;
+      height: 10rem;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+
+      circle {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+        stroke-linecap: round;
+      }
+    }
+  }
+
+  &__error-msg {
+    p {
+      color: #f00;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
   &__thumb {
     position: relative;
 
@@ -257,6 +296,7 @@ export default {
 
 .swiper-slide {
   overflow: hidden;
+  height: auto;
   border-radius: .3rem;
   box-shadow: 0 #{math.div(1, 10)}rem #{math.div(3, 10)}rem rgba(#000, .12), 0 #{math.div(1, 10)}rem #{math.div(2, 10)}rem rgba(#000, .24);
 

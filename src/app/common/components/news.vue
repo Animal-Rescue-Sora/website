@@ -2,6 +2,20 @@
 
 <template>
   <div class="vc news">
+    <div
+      v-if="$data.xhr.loading.status.loading"
+      class="news__loading-spinner"
+    >
+      <svg viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10" />
+      </svg>
+    </div>
+    <div
+      v-if="$data.xhr.loading.status.error"
+      class="news__error-msg"
+    >
+      <p>何らかの原因によりデータの読み込みに失敗しました。時間をおいて再度ページを読み込み直してください。</p>
+    </div>
     <div role="list">
       <div
         v-for="(item, i) in $data.items.slice(0, $data.appear)"
@@ -9,8 +23,8 @@
         role="listitem"
       >
         <time
-          :datetime="$dayjs(item.date).format()"
-          v-text="$dayjs(item.date).format('YYYY年MM月DD日')"
+          :datetime="$dayjs(item.datetime).format()"
+          v-text="$dayjs(item.datetime).format('YYYY年MM月DD日')"
         />
         <fragment v-if="item.href">
           <p>
@@ -110,6 +124,32 @@ export default {
   margin: 0 auto;
   width: min(100%, 84.4rem);
 
+  &__loading-spinner {
+    svg {
+      display: block;
+      margin: auto;
+      width: 10rem;
+      height: 10rem;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+
+      circle {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+        stroke-linecap: round;
+      }
+    }
+  }
+
+  &__error-msg {
+    p {
+      color: #f00;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
   [role="listitem"] {
     padding: 1.6rem 0;
 
@@ -128,13 +168,21 @@ export default {
   a {
     ::v-deep .icn-open-window {
       display: inline;
-      vertical-align: top;
+      vertical-align: text-top;
+
+      @media not all and (min-resolution: .001dpcm) {
+        @supports (-webkit-appearance: none) {
+          vertical-align: -webkit-baseline-middle;
+        }
+      }
 
       svg {
         width: 2.4rem;
         height: 2.4rem;
       }
     }
+
+    &:hover { text-decoration: none; }
   }
 
   button {

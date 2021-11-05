@@ -1,12 +1,26 @@
 <docs></docs>
 
 <template>
-  <header class="vc site-header">
+  <header
+    v-scroll-lock="_theGlobalMenu"
+    class="vc site-header"
+  >
+    <div
+      v-if="$mq !== 'd'"
+      role="presentation"
+    >
+      <div
+        v-ripple
+        @click="$store.dispatch('theGlobalMenu', _theGlobalMenu)"
+      />
+    </div>
+    <slot v-if="$mq !== 'd'" />
     <div>
-      <logo width="80" height="35" />
-      <slot />
-      <fragment v-if="$mq !== 'd'">
+      <div>
+        <logo width="80" height="35" />
+        <slot v-if="$mq === 'd'" />
         <button
+          v-if="$mq !== 'd'"
           v-ripple
           type="button"
           @click="$store.dispatch('theGlobalMenu', _theGlobalMenu)"
@@ -17,7 +31,7 @@
             <span role="presentation" />
           </span>
         </button>
-      </fragment>
+      </div>
     </div>
   </header>
 </template>
@@ -63,19 +77,50 @@ export default {
 
 .site-header {
   position: sticky;
-  z-index: 2;
+  z-index: 11;
   top: 0;
-  padding: .8rem min(percentage(math.div(16, 320)), 1.6rem);
-  background-color: #fff;
   box-shadow: 0 #{math.div(3, 10)}rem #{math.div(6, 10)}rem rgba(#000, .16), 0 #{math.div(3, 10)}rem #{math.div(6, 10)}rem rgba(#000, .23);
 
   > div {
-    margin: 0 auto;
-    width: min(100%, 96rem);
+    &[role="presentation"] {
+      @media (max-width: 898px) {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        color: #fff;
+        pointer-events: none;
+      }
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+      > div {
+        height: 100%;
+        background-color: rgba(0, 0, 0, .72);
+        transition: transform .5s cubic-bezier(.075, .82, .165, 1);
+        transform: translateX(100%);
+        pointer-events: auto;
+
+        [data-global-menu-active="true"] & {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &:not([role="presentation"]) {
+      position: relative;
+      padding: .8rem min(percentage(math.div(16, 320)), 1.6rem);
+      background-color: #fff;
+
+      > div {
+        margin: 0 auto;
+        width: min(100%, 96rem);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
   }
 
   button {

@@ -2,9 +2,23 @@
 
 <template>
   <div
-    v-scroll-lock="_theGlobalModal || _theGlobalModal === 0"
+    v-scroll-lock="_theGlobalModal"
     class="vc waiting-card-list"
   >
+    <div
+      v-if="$data.xhr.loading.status.loading"
+      class="waiting-card-list__loading-spinner"
+    >
+      <svg viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10" />
+      </svg>
+    </div>
+    <div
+      v-if="$data.xhr.loading.status.error"
+      class="waiting-card-list__error-msg"
+    >
+      <p>何らかの原因によりデータの読み込みに失敗しました。時間をおいて再度ページを読み込み直してください。</p>
+    </div>
     <div role="list">
       <div
         v-for="(item, i) in $data.items.slice(0, $data.appear)"
@@ -94,7 +108,7 @@
               </li>
             </ul>
           </div>
-          <modal-trigger-button :modal-id="i">
+          <modal-trigger-button :modal-id="i + 1">
             詳細を見る
           </modal-trigger-button>
         </div>
@@ -115,9 +129,9 @@
       <div
         v-for="(item, i) in $data.items"
         :key="`modal-${i}`"
-        :class="i === _theGlobalModal ? 'waiting-modal--active' : null"
-        :aria-modal="i === _theGlobalModal ? true : false"
-        :aria-hidden="i === _theGlobalModal ? false : true"
+        :class="i + 1 === _theGlobalModal ? 'waiting-modal--active' : null"
+        :aria-modal="i + 1 === _theGlobalModal ? true : false"
+        :aria-hidden="i + 1 === _theGlobalModal ? false : true"
         class="waiting-modal-list__item"
         role="listitem"
         tabindex="-1"
@@ -127,9 +141,7 @@
           class="modal-underlay"
           @click="$store.dispatch('theGlobalModal', null)"
         />
-        <div
-          class="modal-container"
-        >
+        <div class="modal-container">
           <div class="modal-container__scroll-area">
             <div
               v-if="item.youTubeId"
@@ -160,7 +172,6 @@
                       type="image/webp"
                     >
                     <img
-                      ref="modalGalleryStageImage"
                       :src="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
                       width="576"
                       height="720"
@@ -172,9 +183,7 @@
                   v-if="item.gallery.length"
                   class="modal-container__gallery-thumb"
                 >
-                  <div
-                    class="gallery-thumb__item gallery-thumb__item--active"
-                  >
+                  <div class="gallery-thumb__item gallery-thumb__item--active">
                     <picture v-ripple>
                       <source
                         :srcset="item.thumbnail ? `${item.thumbnail}?fit=crop&w=324&h=405&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=324&h=405&fm=webp'"
@@ -186,7 +195,7 @@
                         width="576"
                         height="720"
                         loading="lazy"
-                        @click="galleryChange(this.src)"
+                        @click="galleryChange"
                       >
                     </picture>
                   </div>
@@ -287,106 +296,6 @@ export default {
       },
       index: null,
       gallery: [],
-      gallerySample: [
-        [],
-        [],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-        [
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-          'http://satyr.io1/324x405',
-        ],
-      ],
     };
   },
   computed: {
@@ -410,13 +319,33 @@ export default {
       },
       timeout: 3000,
     }).then((response) => {
+      // 里親募集中 OR 里親確定で、里親募集中だけの連想配列する。
       this.$data.items = response.data.contents.filter(function(item) {
         return item.status[0] === '里親募集中';
       });
 
-      for (let i = 0; i < response.data.contents.length; i++) {
-        this.$data.gallery.push(response.data.contents[i].gallery);
+      // ↑で作った配列とは別で、ギャラリーだけの連想配列を作る
+      for (let i = 0; i < this.$data.items.length; i++) {
+        this.$data.gallery.push(this.$data.items[i].gallery);
       }
+
+      // ↑で作った、ギャラリー用連想配列をマッピングして、連想配列から普通の配列へと上書きする。
+      this.$data.gallery = this.$data.gallery.map(gallery => {
+        // 配列ではない → そのまま返却
+        if (!Array.isArray(gallery)) return gallery;
+        // 配列で、長さ0 → そのまま返却（空配列）
+        if (Array.isArray(gallery) && !gallery.length) return gallery;
+        // 配列で、長さあり → OBJからURL抽出/配列化
+        let images = gallery.map(item => {
+          if (item['img']['url']) {
+            return item.img.url;
+          } else {
+            return null;
+          }
+        }).filter(e=>e);
+
+        return images;
+      });
     }).catch((error) => {
       this.$data.xhr.loading.status.error = true;
     }).finally(() => {
@@ -439,8 +368,13 @@ export default {
     youTubeId: function(val) {
       return `https://www.youtube.com/embed/${getYouTubeID(val)}?playsinline=1`;
     },
-    galleryChange: function(e) {
-      console.log(e.currentTarget.getAttribute('data-src'));
+    galleryChange: function(el) {
+      for (let i = 0; i < el.path[3].querySelectorAll('.gallery-thumb__item').length; i++) {
+        el.path[3].querySelectorAll('.gallery-thumb__item')[i].classList.remove('gallery-thumb__item--active');
+      }
+
+      el.path[2].classList.add('gallery-thumb__item--active');
+      el.path[4].childNodes[0].childNodes[0].childNodes[2].setAttribute('src', el.currentTarget.getAttribute('data-src'));
     },
   },
 };
@@ -450,6 +384,32 @@ export default {
 @use "sass:math";
 
 .waiting-card-list {
+  &__loading-spinner {
+    svg {
+      display: block;
+      margin: auto;
+      width: 10rem;
+      height: 10rem;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+
+      circle {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+        stroke-linecap: round;
+      }
+    }
+  }
+
+  &__error-msg {
+    p {
+      color: #f00;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
   [role="list"] {
     &:not(.waiting-modal-list) {
       @media (min-width: 769px) {
@@ -663,12 +623,6 @@ export default {
         padding-bottom: 1.6rem;
       }
 
-      picture {
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        cursor: pointer;
-      }
-
       img {
         backface-visibility: hidden;
       }
@@ -705,14 +659,24 @@ export default {
 
         picture {
           box-shadow: 0 #{math.div(1, 10)}rem #{math.div(3, 10)}rem rgba(#000, .12), 0 #{math.div(1, 10)}rem #{math.div(2, 10)}rem rgba(#000, .24);
-          touch-action: manipulation;
-          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          transition: box-shadow .5s cubic-bezier(.175, .885, .32, .275);
+
+          img {
+            transition: opacity .5s cubic-bezier(.175, .885, .32, .275);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            cursor: pointer;
+          }
         }
 
         &--active {
           picture {
-            box-shadow: none;
             pointer-events: none;
+            box-shadow: none;
+
+            img {
+              opacity: .48;
+            }
           }
         }
       }
@@ -723,8 +687,6 @@ export default {
       background-color: #f5f5f5;
       flex-shrink: 0;
       flex-basis: auto;
-
-      button {}
     }
   }
 }

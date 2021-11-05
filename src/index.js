@@ -57,6 +57,10 @@ Vue.use(VueAxios, axios);
 import VScrollLock from 'v-scroll-lock';
 Vue.use(VScrollLock);
 
+// https://github.com/nicolasbeauvais/vue-social-sharing
+import VueSocialSharing from 'vue-social-sharing';
+Vue.use(VueSocialSharing);
+
 // https://jp.vuejs.org/v2/api/index.html#productionTip
 Vue.config.productionTip = true;
 

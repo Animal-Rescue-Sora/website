@@ -24,12 +24,12 @@
     content: "";
     pointer-events: none;
 
-    @media (min-width: 641px) {
+    @media (min-width: 899px) {
       margin-top: -5.1rem;
       height: 5.1rem;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 898px) {
       margin-top: -5.6rem;
       height: 5.6rem;
     }
@@ -41,16 +41,21 @@
 }
 
 html {
-  &:focus-within {
-    scroll-behavior: smooth;
-  }
+  font-display: swap;
+  font-feature-settings: "pkna";
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%
 }
 
 body {
   color: #424242;
   line-height: inherit;
-  min-width: 32rem;
+  min-width: 320px;
   font-size: 1.6rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility
 }
 
 ul {
@@ -99,6 +104,7 @@ button {
   appearance: none;
   padding: 0;
   border: none;
+  color: currentColor;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -129,6 +135,50 @@ a {
 
 #app {
   min-height: inherit;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+$green: #008744;
+$blue: #0057e7;
+$red: #d62d20;
+$yellow: #ffa700;
+$white: #eee;
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: $red;
+  }
+  40% {
+    stroke: $blue;
+  }
+  66% {
+    stroke: $green;
+  }
+  80%,
+  90% {
+    stroke: $yellow;
+  }
 }
 
 .support-fund {
