@@ -39,7 +39,11 @@ export default {
   data: function() {
     return {};
   },
-  computed: {},
+  computed: {
+    _theGlobalMenu: function() {
+      return this.$store.getters.theGlobalMenu;
+    },
+  },
   watch: {},
   beforeCreate: function() {},
   created: function() {},
