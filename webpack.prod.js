@@ -51,6 +51,7 @@ module.exports = merge(common, {
         /data-button.*/,
         /page-section--.*/,
         /swiper-button-.*/,
+        /swiper-pagination-.*/,
         '.js',
         '.no-js',
       ],
