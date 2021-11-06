@@ -4,8 +4,8 @@
   <div class="vc amazon-button">
     <a
       v-ripple
-      :href="$props.href"
-      targe="_blank"
+      :href="$data.HREF"
+      target="_blank"
       rel="noopener"
     >
       <img
@@ -31,7 +31,7 @@ export default {
   props: {
     'href': {
       type: String,
-      default: 'https://www.amazon.co.jp/hz/wishlist/ls/3LX5SR2QBKFO9?ref_=wl_share',
+      default: 'https://www.amazon.co.jp/hz/wishlist/ls/',
     },
     'width': {
       type: String,
@@ -47,12 +47,34 @@ export default {
     },
   },
   data: function() {
-    return {};
+    return {
+      HREF: this.$props.href,
+    };
   },
   computed: {},
   watch: {},
   beforeCreate: function() {},
-  created: function() {},
+  created: function() {
+    this.axios({
+      method: 'get',
+      baseURL: 'https://animal-rescue-sora.microcms.io/api/v1',
+      url: '/wishlist',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MICROCMS-API-KEY': 'c5704986ff11430fbcd965af9b4539a11b65'
+      },
+      params: {
+        limit: 100
+      },
+      timeout: 3000,
+    }).then((response) => {
+      this.$data.HREF = response.data.href;
+    }).catch((error) => {
+      //this.$data.xhr.loading.status.error = true;
+    }).finally(() => {
+      //this.$data.xhr.loading.status.loading = false;
+    });
+  },
   beforeMount: function() {},
   mounted: function() {
     this.$nextTick(function() {});
