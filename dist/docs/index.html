@@ -50,7 +50,7 @@
               <global-navigation-item href="#decision-to-foster-parent">里親確定</global-navigation-item>
               <global-navigation-item href="#news">お知らせ</global-navigation-item>
               <global-navigation-item href="#faq">よくあるご質問</global-navigation-item>
-              <global-navigation-item href="#application-guidelines">募集要項</global-navigation-item>
+              <global-navigation-item href="#application-guidelines" :hidden="true">募集要項</global-navigation-item>
               <global-navigation-item href="#support-request">ご支援のお願い</global-navigation-item>
             </global-navigation>
           </site-header>
@@ -101,7 +101,7 @@
             <heading-2 id="faq">よくあるご質問</heading-2>
             <faq-list></faq-list>
           </page-section>
-          <page-section classification="pale-tone-01">
+          <page-section classification="pale-tone-01" :hidden="true">
             <heading-2 id="application-guidelines">里親募集要項</heading-2>
             <div class="application-guidelines">
               <h3>見出し見出し見出し見出し見出し見出し見出し見出し</h3>
@@ -156,7 +156,7 @@
             </heading-2>
             <supported-slider></supported-slider>
           </page-section>
-          <page-section classification="pale-tone-03">
+          <page-section classification="pale-tone-03" :hidden="true">
             <heading-2>アクセス</heading-2>
             <google-map></google-map>
             <div class="access">

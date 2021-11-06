@@ -2,6 +2,7 @@
 
 <template>
   <section
+    v-if="!$props.hidden"
     :id="$props.id ? $props.id : null"
     :tabindex="$props.id ? '-1' : null"
     :class="$props.classification ? `page-section--${$props.classification}` : null"
@@ -32,7 +33,11 @@ export default {
     'src': {
       type: String,
       default: null,
-    }
+    },
+    'hidden': {
+      type: Boolean,
+      default: false,
+    },
   },
   data: function() {
     return {};

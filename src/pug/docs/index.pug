@@ -38,7 +38,7 @@ block main
     page-section(classification="")
       heading-2(id="faq") よくあるご質問
       faq-list
-    page-section(classification="pale-tone-01")
+    page-section(classification="pale-tone-01" :hidden="true")
       heading-2(id="application-guidelines") 里親募集要項
       .application-guidelines
         h3 見出し見出し見出し見出し見出し見出し見出し見出し
@@ -93,7 +93,7 @@ block main
         template(#desktop) ご支援ありがとうございました
         template(#mobile) ご支援に感謝
       supported-slider
-    page-section(classification="pale-tone-03")
+    page-section(classification="pale-tone-03" :hidden="true")
       heading-2 アクセス
       google-map
       .access

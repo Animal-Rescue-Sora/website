@@ -290,7 +290,7 @@ $white: #eee;
   font-size: 1.4rem;
 
   li {
-    &:not(:last-child) {
+    &:not(.detail-list__note) {
       dl {
         display: flex;
 
@@ -301,7 +301,7 @@ $white: #eee;
       }
     }
 
-    &:last-child {
+    &.detail-list__note {
       dl {
         dd {
           margin-top: .4rem;

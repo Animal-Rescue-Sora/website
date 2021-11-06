@@ -28,11 +28,11 @@
         <div class="waiting-card-list__thumb">
           <picture>
             <source
-              :srcset="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
+              :srcset="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
               type="image/webp"
             >
             <img
-              :src="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
+              :src="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
               width="576"
               height="720"
               loading="lazy"
@@ -46,19 +46,19 @@
         <div class="waiting-card-list__summary">
           <div>
             <ul class="detail-list">
-              <li>
+              <li v-if="item.name">
                 <dl>
                   <dt>お名前: </dt>
                   <dd v-text="item.name" />
                 </dl>
               </li>
-              <li>
+              <li v-if="item.age">
                 <dl>
                   <dt>年齢: </dt>
                   <dd v-text="item.age" />
                 </dl>
               </li>
-              <li>
+              <li v-if="item.sex.length">
                 <dl>
                   <dt>性別: </dt>
                   <dd
@@ -71,7 +71,7 @@
                   />
                 </dl>
               </li>
-              <li>
+              <li v-if="item.rescuedDate">
                 <dl>
                   <dt>保護日時: </dt>
                   <dd>
@@ -82,25 +82,28 @@
                   </dd>
                 </dl>
               </li>
-              <li>
+              <li v-if="item.rescuedLocation">
                 <dl>
                   <dt>保護場所: </dt>
                   <dd v-text="item.rescuedLocation" />
                 </dl>
               </li>
-              <li>
+              <li v-if="item.hairPattern">
                 <dl>
                   <dt>毛柄: </dt>
                   <dd v-text="item.hairPattern" />
                 </dl>
               </li>
-              <li>
+              <li v-if="item.breed">
                 <dl>
                   <dt>種類: </dt>
                   <dd v-text="item.breed" />
                 </dl>
               </li>
-              <li>
+              <li
+                v-if="item.description"
+                class="detail-list__note"
+              >
                 <dl>
                   <dt>備考: </dt>
                   <dd v-html="item.description" />
@@ -168,11 +171,11 @@
                 <div class="modal-container__gallery-stage">
                   <picture>
                     <source
-                      :srcset="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
+                      :srcset="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
                       type="image/webp"
                     >
                     <img
-                      :src="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
+                      :src="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
                       width="576"
                       height="720"
                       loading="lazy"
@@ -186,12 +189,12 @@
                   <div class="gallery-thumb__item gallery-thumb__item--active">
                     <picture v-ripple>
                       <source
-                        :srcset="item.thumbnail ? `${item.thumbnail}?fit=crop&w=324&h=405&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=324&h=405&fm=webp'"
+                        :srcset="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=324&h=405&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=324&h=405&fm=webp'"
                         type="image/webp"
                       >
                       <img
-                        :src="item.thumbnail ? `${item.thumbnail}?fit=crop&w=324&h=405` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=324&h=405'"
-                        :data-src="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
+                        :src="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=324&h=405` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=324&h=405'"
+                        :data-src="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
                         width="576"
                         height="720"
                         loading="lazy"
@@ -222,34 +225,50 @@
                 </div>
               </div>
               <dl>
-                <dt>お名前</dt>
-                <dd v-text="item.name" />
-                <dt>年齢</dt>
-                <dd v-text="item.age" />
-                <dt>性別</dt>
-                <dd
-                  v-if="item.sex[0] === '男の子'"
-                  v-text="`男の子♂`"
-                />
-                <dd
-                  v-if="item.sex[0] === '女の子'"
-                  v-text="`女の子♀`"
-                />
-                <dt>保護日時</dt>
-                <dd>
-                  <time
-                    :datetime="$dayjs(item.rescuedDate).format()"
-                    v-text="$dayjs(item.rescuedDate).format('YYYY月MM月DD日')"
+                <fragment v-if="item.name">
+                  <dt>お名前</dt>
+                  <dd v-text="item.name" />
+                </fragment>
+                <fragment v-if="item.age">
+                  <dt>年齢</dt>
+                  <dd v-text="item.age" />
+                </fragment>
+                <fragment v-if="item.sex.length">
+                  <dt>性別</dt>
+                  <dd
+                    v-if="item.sex[0] === '男の子'"
+                    v-text="`男の子♂`"
                   />
-                </dd>
-                <dt>保護場所</dt>
-                <dd v-text="item.rescuedLocation" />
-                <dt>毛柄</dt>
-                <dd v-text="item.hairPattern" />
-                <dt>種類</dt>
-                <dd v-text="item.breed" />
-                <dt>備考</dt>
-                <dd v-html="item.description" />
+                  <dd
+                    v-if="item.sex[0] === '女の子'"
+                    v-text="`女の子♀`"
+                  />
+                </fragment>
+                <fragment v-if="item.rescuedDate">
+                  <dt>保護日時</dt>
+                  <dd>
+                    <time
+                      :datetime="$dayjs(item.rescuedDate).format()"
+                      v-text="$dayjs(item.rescuedDate).format('YYYY月MM月DD日')"
+                    />
+                  </dd>
+                </fragment>
+                <fragment v-if="item.rescuedLocation">
+                  <dt>保護場所</dt>
+                  <dd v-text="item.rescuedLocation" />
+                </fragment>
+                <fragment v-if="item.hairPattern">
+                  <dt>毛柄</dt>
+                  <dd v-text="item.hairPattern" />
+                </fragment>
+                <fragment v-if="item.breed">
+                  <dt>種類</dt>
+                  <dd v-text="item.breed" />
+                </fragment>
+                <fragment v-if="item.description">
+                  <dt>備考</dt>
+                  <dd v-html="item.description" />
+                </fragment>
               </dl>
             </div>
           </div>
@@ -294,7 +313,6 @@ export default {
           },
         },
       },
-      index: null,
       gallery: [],
     };
   },
@@ -317,7 +335,7 @@ export default {
       params: {
         limit: 100
       },
-      timeout: 3000,
+      timeout: 5000,
     }).then((response) => {
       // 里親募集中 OR 里親確定で、里親募集中だけの連想配列する。
       this.$data.items = response.data.contents.filter(function(item) {

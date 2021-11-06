@@ -2,6 +2,7 @@
 
 <template>
   <div
+    v-if="!$props.hidden"
     class="vc global-navigation-item"
     role="listitem"
   >
@@ -34,6 +35,10 @@ export default {
     'href': {
       type: String,
       default: null,
+    },
+    'hidden': {
+      type: Boolean,
+      default: false,
     },
   },
   data: function() {

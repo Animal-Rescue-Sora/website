@@ -84,7 +84,7 @@
                     <dd v-text="item.breed" />
                   </dl>
                 </li>
-                <li>
+                <li class="detail-list__note">
                   <dl>
                     <dt>備考: </dt>
                     <dd v-html="item.description" />
