@@ -49,6 +49,14 @@ export default {
   data: function() {
     return {
       HREF: this.$props.href,
+      xhr: {
+        loading: {
+          status: {
+            loading: true,
+            error: false,
+          },
+        },
+      },
     };
   },
   computed: {},
