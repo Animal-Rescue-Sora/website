@@ -4,12 +4,12 @@
   "description": "犬・猫を主として、飼い主のいない動物たちの保護活動に取り組んでいます。三重県尾鷲市内で保護施設を運営しており、獣医師の協力を得て健康管理や避妊・去勢手術を適切に施しています。",
   "icons": [
     {
-      "src": "/common/img/icons/icon-192.png",
+      "src": "/common/img/icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/common/img/icons/icon-512.png",
+      "src": "/common/img/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
