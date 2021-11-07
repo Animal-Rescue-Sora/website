@@ -2,6 +2,7 @@
 
 <template>
   <div
+    v-if="$data.items.length"
     v-scroll-lock="_theGlobalModal"
     class="vc waiting-card-list"
   >

@@ -10,7 +10,7 @@
       v-ripple
       :href="$props.href"
       itemprop="url"
-      @click="$store.dispatch('theGlobalMenu', _theGlobalMenu)"
+      @click="$store.dispatch('theGlobalMenu', true)"
     >
       <icn-arrow-downward v-if="$mq === 'd'" />
       <span itemprop="name">
