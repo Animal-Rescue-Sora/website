@@ -29,11 +29,11 @@
           <div class="decision-to-foster-parent-slider__thumb">
             <picture>
               <source
-                :srcset="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
+                :srcset="item.thumbnail ? `${item.thumbnail.src}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
                 type="image/webp"
               >
               <img
-                :src="item.thumbnail ? `${item.thumbnail}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
+                :src="item.thumbnail ? `${item.thumbnail.src}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
                 width="576"
                 height="720"
                 loading="lazy"
@@ -47,19 +47,19 @@
           <div class="decision-to-foster-parent-slider__summary">
             <div>
               <ul class="detail-list">
-                <li>
+                <li v-if="item.name">
                   <dl>
                     <dt>お名前: </dt>
-                    <dd v-html="item.name" />
+                    <dd v-text="item.name" />
                   </dl>
                 </li>
-                <li>
+                <li v-if="item.age">
                   <dl>
                     <dt>年齢: </dt>
-                    <dd v-html="item.age" />
+                    <dd v-text="item.age" />
                   </dl>
                 </li>
-                <li>
+                <li v-if="item.sex.length">
                   <dl>
                     <dt>性別: </dt>
                     <dd
@@ -72,19 +72,22 @@
                     />
                   </dl>
                 </li>
-                <li>
+                <li v-if="item.hairPattern">
                   <dl>
                     <dt>毛柄: </dt>
                     <dd v-text="item.hairPattern" />
                   </dl>
                 </li>
-                <li>
+                <li v-if="item.breed">
                   <dl>
                     <dt>種類: </dt>
                     <dd v-text="item.breed" />
                   </dl>
                 </li>
-                <li class="detail-list__note">
+                <li
+                  v-if="item.description"
+                  class="detail-list__note"
+                >
                   <dl>
                     <dt>備考: </dt>
                     <dd v-html="item.description" />
