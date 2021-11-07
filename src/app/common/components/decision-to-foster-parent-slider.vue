@@ -29,11 +29,11 @@
           <div class="decision-to-foster-parent-slider__thumb">
             <picture>
               <source
-                :srcset="item.thumbnail ? `${item.thumbnail.src}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
+                :srcset="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440&fm=webp` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440&fm=webp'"
                 type="image/webp"
               >
               <img
-                :src="item.thumbnail ? `${item.thumbnail.src}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
+                :src="item.thumbnail ? `${item.thumbnail.url}?fit=crop&w=1152&h=1440` : 'https://images.microcms-assets.io/assets/933db45504df41da96d0313559c96860/ef851f6969ca4982965751853a8d0e29/no-image.png?fit=crop&w=1152&h=1440'"
                 width="576"
                 height="720"
                 loading="lazy"
