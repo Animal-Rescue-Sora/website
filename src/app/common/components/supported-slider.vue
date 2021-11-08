@@ -148,6 +148,7 @@ export default {
       slidesPerView: 'auto',
       centerInsufficientSlides: true,
       followFinger: true,
+      speed: 500,
       navigation: {
         nextEl: this.$refs.swiperButtonNext,
         prevEl: this.$refs.swiperButtonPrev,
@@ -279,6 +280,10 @@ export default {
   overflow: visible;
   margin: 0 auto;
   width: min(100%, 96rem);
+}
+
+.swiper-wrapper {
+  transition-timing-function: cubic-bezier(.4, .1, .16, .96);
 }
 
 .swiper-slide {
